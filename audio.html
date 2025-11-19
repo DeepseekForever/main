@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Песня - Deepseek Forever</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="phototrack.png">
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="Песня">Песня</h1>
+            <p class="subtitle">Deepseek Forever</p>
+        </header>
+
+        <nav class="nav-menu">
+            <a href="index.html" class="nav-btn">Главная</a>
+            <a href="text.html" class="nav-btn">Текст</a>
+            <a href="audio.html" class="nav-btn active">Песня</a>
+            <a href="clip.html" class="nav-btn">Клип</a>
+            <a href="copyright.html" class="nav-btn">Авторские права</a>
+        </nav>
+
+        <main>
+            <div class="player-card">
+                <div class="album-art">
+                    <img src="phototrack.png" alt="Deepseek Forever">
+                </div>
+                <div class="player-controls">
+                    <h3>Deepseek Forever</h3>
+                    
+                    <!-- Простой аудиоплеер -->
+                    <audio controls style="width: 100%; margin: 20px 0;">
+                        <source src="track.mp3" type="audio/mpeg">
+                        Ваш браузер не поддерживает аудио элемент.
+                    </audio>
+                    
+                    <div class="track-info">
+                        <p>🎵 Марк Г.</p>
+                        <p>🎤 Антистресс-гимн цифрового поколения</p>
+                        <p>⏱️ Длительность: 1:14</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <a href="track.mp3" download class="download-btn">🎵 Скачать трек</a>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Упрощенный скрипт -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Audio page loaded');
+            
+            // Простая проверка аудио
+            const audio = document.querySelector('audio');
+            if (audio) {
+                audio.addEventListener('error', function(e) {
+                    console.error('Ошибка загрузки аудио:', e);
+                    alert('Файл track.mp3 не найден или поврежден');
+                });
+                
+                audio.addEventListener('canplay', function() {
+                    console.log('Аудио готово к воспроизведению');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
