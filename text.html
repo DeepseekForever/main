@@ -6,6 +6,149 @@
     <title>Текст - Deepseek Forever</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="phototrack.png">
+    <style>
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--darker-bg);
+            border: 2px solid var(--neon-pink);
+            border-radius: 15px;
+            margin: 15% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 500px;
+            animation: modal-appear 0.3s ease-out;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+        }
+
+        @keyframes modal-appear {
+            from {
+                opacity: 0;
+                transform: scale(0.7) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: rgba(255, 0, 255, 0.2);
+            padding: 20px;
+            border-bottom: 1px solid var(--neon-pink);
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .close {
+            color: var(--neon-pink);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-yes {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+        }
+
+        .btn-yes:hover {
+            background: var(--dark-bg);
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        .btn-no {
+            background: transparent;
+            color: var(--neon-pink);
+            border: 1px solid var(--neon-pink);
+        }
+
+        .btn-no:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        /* Стили для кликабельных "кхм кхм" */
+        .khm-khm {
+            color: var(--neon-pink);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        .khm-khm:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+            transform: scale(1.1);
+        }
+
+        .khm-khm::after {
+            content: '🔍';
+            position: absolute;
+            right: -25px;
+            top: 0;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .khm-khm:hover::after {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <div class="bg-animation"></div>
@@ -76,7 +219,7 @@
                         <p class="highlight">Дипсик Дипсик навсегда</p>
                         <p class="highlight">Дипсик Дипсик навсегда</p>
                         <p>Пока не доказано</p>
-                        <p>Не кхм кхм что сказано</p>
+                        <p>Не <span class="khm-khm">кхм кхм кхм</span> что сказано</p>
                     </div>
                 </div>
 
@@ -117,7 +260,7 @@
                         <p class="highlight">Дипсик, Дипсик! навсегда</p>
                         <p class="highlight">Дипсик, Дипсик! навсегда</p>
                         <p>Пока не доказано</p>
-                        <p>Не кхм кхм что сказано</p>
+                        <p>Не <span class="khm-khm">кхм кхм кхм</span> что сказано</p>
                     </div>
                 </div>
 
@@ -129,7 +272,7 @@
                         <p class="highlight">Дипсик Дипсик навсегда</p>
                         <p class="highlight">Дипсик Дипсик навсегда</p>
                         <p>Пока не доказано</p>
-                        <p>Не кхм кхм что сказано</p>
+                        <p>Не <span class="khm-khm">кхм кхм кхм</span> что сказано</p>
                     </div>
                 </div>
 
@@ -144,6 +287,80 @@
             </div>
         </main>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Модальное окно для секрета -->
+    <div id="secretModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔐 Секретное сообщение</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Вы хотите узнать секрет о <span style="color: var(--neon-pink);">"Кхм кхм кхм"</span>?</p>
+                <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 10px;">
+                    Откроется страница с историей происхождения фразы...
+                </p>
+                <div class="modal-buttons">
+                    <button class="modal-btn btn-no">Нет</button>
+                    <button class="modal-btn btn-yes">Да</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Модальное окно для "кхм кхм"
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('secretModal');
+            const khmElements = document.querySelectorAll('.khm-khm');
+            const closeBtn = document.querySelector('.close');
+            const noBtn = document.querySelector('.btn-no');
+            const yesBtn = document.querySelector('.btn-yes');
+
+            // Открытие модального окна при клике на "кхм кхм"
+            khmElements.forEach(khm => {
+                khm.addEventListener('click', function() {
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden'; // Блокируем скролл
+                });
+            });
+
+            // Закрытие модального окна
+            function closeModal() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Возвращаем скролл
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+            noBtn.addEventListener('click', closeModal);
+
+            // Редирект на секретную страницу
+            yesBtn.addEventListener('click', function() {
+                window.location.href = 'secret.html';
+            });
+
+            // Закрытие при клике вне модального окна
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Закрытие на Escape
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    closeModal();
+                }
+            });
+
+            // Анимация для карточек
+            const lyricCards = document.querySelectorAll('.lyric-card');
+            lyricCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
